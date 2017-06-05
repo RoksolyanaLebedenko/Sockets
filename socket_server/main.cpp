@@ -47,12 +47,20 @@ int main()
     close (sd );
     for (;;) {
         int cc=recv(psd,buf, sizeof(buf, 0), 0);
+        string sbuf(buf);
         if (cc == 0) exit (EXIT_SUCCESS);
         buf[cc] = '\0';
-        if (buf == "t"){
-        //printf ("message received: %s\n", buf);
-        //printf ("message received: %s\n", date);
+        if (sbuf == "t"){
         printf ("message received: %s\n", time);
+        }
+        else if(sbuf == "d"){
+            printf ("message received: %s\n", date);
+        }
+        else if (sbuf == "h"){
+            printf ("message received: %s\n", "Heloo!");
+        }
+        else{
+            printf ("message received: %s\n", buf);
         }
     }
 }
