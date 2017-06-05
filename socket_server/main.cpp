@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <ctime>
+
 using namespace std;
 
 
@@ -23,12 +24,12 @@ int main()
       dateinfo = localtime(&rawtime);
 
       strftime(buffer,sizeof(buffer),"%d-%m-%Y\n",dateinfo);
-      string date(buffer);
+      string dater(buffer);
       strftime(buffer,sizeof(buffer),"%I:%M:%S\n",timeinfo);
-      string time(buffer);
+      string timer(buffer);
 
-      cout << date;
-      cout << time;
+      const char *date = dater.c_str();
+      const char *time = timer.c_str();
     //----------------------------------------//
     struct sockaddr_in server ; char buf[1024];
     int sd = socket(AF_INET, SOCK_STREAM, 0);
@@ -36,7 +37,7 @@ int main()
     memset(&server, 0, sizeof( server ));
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = htonl(INADDR_ANY);
-    server.sin_port = htons(2233);
+    server.sin_port = htons(14880);
 
     int res = bind( sd, (struct sockaddr*) &server, sizeof( server ) );
 
@@ -48,6 +49,10 @@ int main()
         int cc=recv(psd,buf, sizeof(buf, 0), 0);
         if (cc == 0) exit (EXIT_SUCCESS);
         buf[cc] = '\0';
-        printf ("message received: %s\n", buf);
+        if (buf == "t"){
+        //printf ("message received: %s\n", buf);
+        //printf ("message received: %s\n", date);
+        printf ("message received: %s\n", time);
+        }
     }
 }

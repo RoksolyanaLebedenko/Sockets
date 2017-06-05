@@ -21,7 +21,7 @@ int main() {
     struct sockaddr_in server ;
     struct addrinfo addr;
     char host_buf[256];
-    int portno = 2233;                         //
+    int portno = 14880;                         //
     int sd = socket(AF_INET,SOCK_STREAM,0);
 
     if (sd < 0)
@@ -36,10 +36,16 @@ int main() {
 
     if (connect(sd,(struct sockaddr *) &server,sizeof(server)) < 0)
         error("ERROR connecting");
-
+    string command;
+    cout << "Enter a command ( t; d; h; m and your word; ): ";
+    cin >> command;
+    char comm[1024];
+    strcpy(comm, command.c_str());
 
     for (;;) {
-        char buf [] = "Hello!";
+
+        char buf[1024] = {*comm}
+                         ;
         send(sd, buf, strlen (buf ), 0 );
         printf("Sent: %s\n", buf);
         sleep(2);
