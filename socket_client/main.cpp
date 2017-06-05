@@ -37,7 +37,7 @@ int main() {
     if (connect(sd,(struct sockaddr *) &server,sizeof(server)) < 0)
         error("ERROR connecting");
     string command;
-    cout << "Enter a command ( t; d; h; m and your word; ): ";
+    cout << "Enter a command ( t; d; h; m; ): ";
     cin >> command;
     char comm[1024];
     strcpy(comm, command.c_str());
